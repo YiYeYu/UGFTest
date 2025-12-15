@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<UnityGameFramework>
+  <ResourceCollection>
+    <Resources>
+      <Resource Name="Scenes/Main" LoadType="0" Packed="False" />
+    </Resources>
+    <Assets>
+      <Asset Guid="230885c36dbbb4e78b7810e7a38a2e73" ResourceName="Scenes/Main" />
+    </Assets>
+  </ResourceCollection>
+</UnityGameFramework>

@@ -1,0 +1,60 @@
+using Luban;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+{{namespace_with_grace_begin __namespace}}
+public partial class {{__name}}
+{
+    public bool IsLoading{get; private set;}
+    public bool IsLoaded{get; private set;}
+
+    {{~for table in __tables ~}}
+{{~if table.comment != '' ~}}
+    /// <summary>
+    /// {{escape_comment table.comment}}
+    /// </summary>
+{{~end~}}
+    public {{table.full_name}} {{format_property_name __code_style table.name}} {get; private set;}
+    {{~end~}}
+
+    public void LoadAll(System.Func<string, ByteBuf> loader)
+    {
+        {{~for table in __tables ~}}
+        {{format_property_name __code_style table.name}} = new {{table.full_name}}(loader("{{table.output_data_file}}"));
+        {{~end~}}
+        ResolveRef();
+    }
+
+    public async Task LoadAsync(System.Func<string, Task<ByteBuf>> loader)
+    {
+        IsLoading = true;
+        IsLoaded = false;
+
+        Dictionary<string, Task<ByteBuf>> tasks = new ();
+
+        {{~for table in __tables ~}}
+        tasks["{{table.output_data_file}}"] = loader("{{table.output_data_file}}");
+        {{~end~}}
+
+        Task.WaitAll(tasks.Values.ToArray());
+
+        {{~for table in __tables ~}}
+        {{format_property_name __code_style table.name}} = new {{table.full_name}}(tasks["{{table.output_data_file}}"].Result);
+        {{~end~}}
+
+        ResolveRef();
+
+        IsLoading = false;
+        IsLoaded = true;
+    }
+    
+    private void ResolveRef()
+    {
+        {{~for table in __tables ~}}
+        {{format_property_name __code_style table.name}}.ResolveRef(this);
+        {{~end~}}
+    }
+}
+
+{{namespace_with_grace_end __namespace}}

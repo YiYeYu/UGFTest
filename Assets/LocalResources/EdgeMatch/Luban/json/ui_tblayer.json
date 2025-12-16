@@ -1,0 +1,37 @@
+[
+  {
+    "group_id": 1,
+    "group_name": "Default",
+    "order": 1000
+  },
+  {
+    "group_id": 2,
+    "group_name": "Bottom",
+    "order": 200
+  },
+  {
+    "group_id": 3,
+    "group_name": "Resident",
+    "order": 500
+  },
+  {
+    "group_id": 4,
+    "group_name": "Control",
+    "order": 800
+  },
+  {
+    "group_id": 5,
+    "group_name": "Window",
+    "order": 1500
+  },
+  {
+    "group_id": 6,
+    "group_name": "Toast",
+    "order": 2000
+  },
+  {
+    "group_id": 7,
+    "group_name": "Top",
+    "order": 2500
+  }
+]

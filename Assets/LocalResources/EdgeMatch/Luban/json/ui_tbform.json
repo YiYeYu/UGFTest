@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "asset_name": "MainForm",
+    "group": 3,
+    "allow_mult_instance": false,
+    "pause_covered": false
+  },
+  {
+    "id": 101,
+    "asset_name": "SettingForm",
+    "group": 5,
+    "allow_mult_instance": false,
+    "pause_covered": true
+  }
+]

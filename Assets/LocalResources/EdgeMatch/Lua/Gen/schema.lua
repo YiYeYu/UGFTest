@@ -35,6 +35,10 @@ end
 
 local enums =
 {
+    ---@class UI.FormID
+     ---@field public MainForm integer
+     ---@field public SettingForm integer
+    ['UI.FormID'] = {   MainForm=1,  SettingForm=101,  };
     ---@class UI.Group
      ---@field public Default integer @默认，中间层级
      ---@field public Bottom integer @最低

@@ -25,9 +25,13 @@ public static class AssetUtility
         return Utility.Text.Format("Assets/GameMain/Entities/{0}.prefab", assetName);
     }
 
-    public static string GetUIFormAsset(string assetName)
+    public static string GetUIFormAsset(string assetName, string game = "")
     {
-        return Utility.Text.Format("Assets/GameMain/UI/UIForms/{0}.prefab", assetName);
+        if (string.IsNullOrEmpty(game))
+        {
+            game = GAME_NAME;
+        }
+        return Utility.Text.Format("Assets/LocalResources/{1}/Prefabs/{0}.prefab", assetName, game);
     }
 
 }

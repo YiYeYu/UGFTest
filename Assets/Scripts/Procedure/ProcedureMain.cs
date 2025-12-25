@@ -6,9 +6,10 @@ using UnityEngine;
 using GameFramework;
 using GameFramework.Procedure;
 using GameFramework.Fsm;
-using UnityGameFramework.Runtime;
+// using UnityGameFramework.Runtime;
 using GameFramework.Resource;
 using System.Resources;
+using Game;
 
 public class ProcedureMain : ProcedureBase
 {
@@ -26,9 +27,12 @@ public class ProcedureMain : ProcedureBase
     {
         base.OnEnter(procedureOwner);
 
-        var resourceComponent = GameEntry.GetComponent<ResourceComponent>();
-        var sceneComponent = GameEntry.GetComponent<SceneComponent>();
+        var resourceComponent = GameEntry.Resource;
+        var sceneComponent = GameEntry.Scene;
         sceneComponent.LoadScene("Assets/LocalResources/Scenes/Main.unity");
+
+        var uiManager = GameEntry.UI;
+        uiManager.OpenUIForm(cfg.UI.FormID.MainForm);
     }
 
     protected override void OnLeave(IFsm<IProcedureManager> procedureOwner, bool isShutdown)

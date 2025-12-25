@@ -14,13 +14,13 @@ namespace cfg.UI
 {
 public partial class TbForm
 {
-    private readonly System.Collections.Generic.Dictionary<int, UI.Form> _dataMap;
+    private readonly System.Collections.Generic.Dictionary<UI.FormID, UI.Form> _dataMap;
     private readonly System.Collections.Generic.List<UI.Form> _dataList;
     
     public TbForm(ByteBuf _buf)
     {
         int n = _buf.ReadSize();
-        _dataMap = new System.Collections.Generic.Dictionary<int, UI.Form>(n);
+        _dataMap = new System.Collections.Generic.Dictionary<UI.FormID, UI.Form>(n);
         _dataList = new System.Collections.Generic.List<UI.Form>(n);
         for(int i = n ; i > 0 ; --i)
         {
@@ -31,12 +31,12 @@ public partial class TbForm
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, UI.Form> DataMap => _dataMap;
+    public System.Collections.Generic.Dictionary<UI.FormID, UI.Form> DataMap => _dataMap;
     public System.Collections.Generic.List<UI.Form> DataList => _dataList;
 
-    public UI.Form GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : default;
-    public UI.Form Get(int key) => _dataMap[key];
-    public UI.Form this[int key] => _dataMap[key];
+    public UI.Form GetOrDefault(UI.FormID key) => _dataMap.TryGetValue(key, out var v) ? v : default;
+    public UI.Form Get(UI.FormID key) => _dataMap[key];
+    public UI.Form this[UI.FormID key] => _dataMap[key];
 
     public void ResolveRef(TablesComponent tables)
     {

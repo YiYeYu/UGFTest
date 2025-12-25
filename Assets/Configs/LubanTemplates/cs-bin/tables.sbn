@@ -37,10 +37,10 @@ public partial class {{__name}}
         tasks["{{table.output_data_file}}"] = loader("{{table.output_data_file}}");
         {{~end~}}
 
-        Task.WaitAll(tasks.Values.ToArray());
+        // Task.WaitAll(tasks.Values.ToArray());
 
         {{~for table in __tables ~}}
-        {{format_property_name __code_style table.name}} = new {{table.full_name}}(tasks["{{table.output_data_file}}"].Result);
+        {{format_property_name __code_style table.name}} = new {{table.full_name}}(await tasks["{{table.output_data_file}}"]);
         {{~end~}}
 
         ResolveRef();

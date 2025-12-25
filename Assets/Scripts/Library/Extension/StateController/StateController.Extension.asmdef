@@ -1,0 +1,18 @@
+{
+    "name": "StateController.Extension",
+    "rootNamespace": "",
+    "references": [
+        "StateController",
+        "Leihuo.UXTools.Runtime",
+        "Leihuo.UXTools.Editor.Common"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

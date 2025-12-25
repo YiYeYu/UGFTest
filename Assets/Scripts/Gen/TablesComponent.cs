@@ -8,60 +8,53 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace cfg
 {
-    public partial class TablesComponent
+public partial class TablesComponent
+{
+    public bool IsLoading{get; private set;}
+    public bool IsLoaded{get; private set;}
+
+    public UI.TbForm TbForm {get; private set;}
+    public UI.TbLayer TbLayer {get; private set;}
+
+    public void LoadAll(System.Func<string, ByteBuf> loader)
     {
-        public bool IsLoading { get; private set; }
-        public bool IsLoaded { get; private set; }
-
-        public UI.TbForm TbForm { get; private set; }
-        public UI.TbLayer TbLayer { get; private set; }
-
-        public void LoadAll(System.Func<string, ByteBuf> loader)
-        {
-            TbForm = new UI.TbForm(loader("ui_tbform"));
-            TbLayer = new UI.TbLayer(loader("ui_tblayer"));
-            ResolveRef();
-        }
-
-        public async Task LoadAsync(System.Func<string, Task<ByteBuf>> loader)
-        {
-            IsLoading = true;
-            IsLoaded = false;
-
-            UnityEngine.Debug.Log("LoadAsync Luban started");
-
-            // ConcurrentDictionary<string, Task<ByteBuf>> tasks = new();
-
-            // UnityEngine.Debug.Log("LoadAsync Luban started1111");
-            // tasks["ui_tbform"] = loader("ui_tbform");
-            // UnityEngine.Debug.Log("LoadAsync Luban started2222");
-            // tasks["ui_tblayer"] = loader("ui_tblayer");
-            // UnityEngine.Debug.Log("LoadAsync Luban started333");
-
-            // Task.WaitAll(tasks.Values.ToArray());
-
-            TbForm = new UI.TbForm(await loader("ui_tbform"));
-            TbLayer = new UI.TbLayer(await loader("ui_tblayer"));
-
-            ResolveRef();
-
-            IsLoading = false;
-            IsLoaded = true;
-        }
-
-        private void ResolveRef()
-        {
-            TbForm.ResolveRef(this);
-            TbLayer.ResolveRef(this);
-        }
+        TbForm = new UI.TbForm(loader("ui_tbform"));
+        TbLayer = new UI.TbLayer(loader("ui_tblayer"));
+        ResolveRef();
     }
+
+    public async Task LoadAsync(System.Func<string, Task<ByteBuf>> loader)
+    {
+        IsLoading = true;
+        IsLoaded = false;
+
+        Dictionary<string, Task<ByteBuf>> tasks = new ();
+
+        tasks["ui_tbform"] = loader("ui_tbform");
+        tasks["ui_tblayer"] = loader("ui_tblayer");
+
+        // Task.WaitAll(tasks.Values.ToArray());
+
+        TbForm = new UI.TbForm(await tasks["ui_tbform"]);
+        TbLayer = new UI.TbLayer(await tasks["ui_tblayer"]);
+
+        ResolveRef();
+
+        IsLoading = false;
+        IsLoaded = true;
+    }
+    
+    private void ResolveRef()
+    {
+        TbForm.ResolveRef(this);
+        TbLayer.ResolveRef(this);
+    }
+}
 
 }

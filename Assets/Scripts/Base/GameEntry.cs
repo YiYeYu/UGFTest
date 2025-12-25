@@ -7,7 +7,7 @@
 
 using UnityEngine;
 
-namespace Test
+namespace Game
 {
     /// <summary>
     /// 游戏入口。

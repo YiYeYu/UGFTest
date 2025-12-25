@@ -4,7 +4,7 @@ using GameFramework.Localization;
 using UnityGameFramework.Runtime;
 using UnityEngine;
 
-public class LocalizationHelper : DefaultLocalizationHelper
+public class GameLocalizationHelper : DefaultLocalizationHelper
 {
 
     /// <inheritdoc />

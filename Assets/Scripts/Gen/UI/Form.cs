@@ -16,7 +16,7 @@ public sealed partial class Form : Luban.BeanBase
 {
     public Form(ByteBuf _buf) 
     {
-        Id = _buf.ReadInt();
+        Id = (UI.FormID)_buf.ReadInt();
         AssetName = _buf.ReadString();
         Group = (UI.Group)_buf.ReadInt();
         AllowMultInstance = _buf.ReadBool();
@@ -31,7 +31,7 @@ public sealed partial class Form : Luban.BeanBase
     /// <summary>
     /// 编号
     /// </summary>
-    public readonly int Id;
+    public readonly UI.FormID Id;
     /// <summary>
     /// 资源名
     /// </summary>

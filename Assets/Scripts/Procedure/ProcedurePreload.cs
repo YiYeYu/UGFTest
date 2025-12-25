@@ -47,6 +47,11 @@ public class ProcedurePreload : ProcedureBase
 
         Debug.Log("Load Luban finished");
 
+        foreach (var item in tablesComponent.TbLayer.DataList)
+        {
+            Game.GameEntry.UI.AddUIGroup(item.GroupName, item.Order);
+        }
+
         foreach (var item in tablesComponent.TbForm.DataList)
         {
             Debug.LogFormat("Luban ui form: {0}", item.ToString());

@@ -47,6 +47,11 @@ public class ProcedurePreload : ProcedureBase
 
         Debug.Log("Load Luban finished");
 
+        foreach (var item in tablesComponent.TbGroup.DataList)
+        {
+            Game.GameEntry.Entity.AddEntityGroup(item.GroupName, item.AutoReleaseInterval, item.Capacity, item.ExpireTime, item.Priority);
+        }
+
         foreach (var item in tablesComponent.TbLayer.DataList)
         {
             Game.GameEntry.UI.AddUIGroup(item.GroupName, item.Order);

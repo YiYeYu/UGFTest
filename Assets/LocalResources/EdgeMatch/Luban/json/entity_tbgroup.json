@@ -1,0 +1,26 @@
+[
+  {
+    "group_id": 1,
+    "group_name": "Default",
+    "auto_release_interval": 60,
+    "capacity": 16,
+    "expire_time": 60,
+    "priority": 1
+  },
+  {
+    "group_id": 2,
+    "group_name": "Brick",
+    "auto_release_interval": 0,
+    "capacity": 0,
+    "expire_time": 0,
+    "priority": 2
+  },
+  {
+    "group_id": 3,
+    "group_name": "Slot",
+    "auto_release_interval": 0,
+    "capacity": 0,
+    "expire_time": 0,
+    "priority": 3
+  }
+]

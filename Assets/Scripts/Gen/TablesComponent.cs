@@ -21,11 +21,15 @@ public partial class TablesComponent
 
     public UI.TbForm TbForm {get; private set;}
     public UI.TbLayer TbLayer {get; private set;}
+    public Entity.TbEntityLogic TbEntityLogic {get; private set;}
+    public Entity.TbGroup TbGroup {get; private set;}
 
     public void LoadAll(System.Func<string, ByteBuf> loader)
     {
         TbForm = new UI.TbForm(loader("ui_tbform"));
         TbLayer = new UI.TbLayer(loader("ui_tblayer"));
+        TbEntityLogic = new Entity.TbEntityLogic(loader("entity_tbentitylogic"));
+        TbGroup = new Entity.TbGroup(loader("entity_tbgroup"));
         ResolveRef();
     }
 
@@ -38,11 +42,15 @@ public partial class TablesComponent
 
         tasks["ui_tbform"] = loader("ui_tbform");
         tasks["ui_tblayer"] = loader("ui_tblayer");
+        tasks["entity_tbentitylogic"] = loader("entity_tbentitylogic");
+        tasks["entity_tbgroup"] = loader("entity_tbgroup");
 
         // Task.WaitAll(tasks.Values.ToArray());
 
         TbForm = new UI.TbForm(await tasks["ui_tbform"]);
         TbLayer = new UI.TbLayer(await tasks["ui_tblayer"]);
+        TbEntityLogic = new Entity.TbEntityLogic(await tasks["entity_tbentitylogic"]);
+        TbGroup = new Entity.TbGroup(await tasks["entity_tbgroup"]);
 
         ResolveRef();
 
@@ -54,6 +62,8 @@ public partial class TablesComponent
     {
         TbForm.ResolveRef(this);
         TbLayer.ResolveRef(this);
+        TbEntityLogic.ResolveRef(this);
+        TbGroup.ResolveRef(this);
     }
 }
 

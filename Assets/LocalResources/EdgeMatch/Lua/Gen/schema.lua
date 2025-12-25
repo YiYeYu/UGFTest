@@ -35,6 +35,18 @@ end
 
 local enums =
 {
+    ---@class Entity.EntityID
+     ---@field public SlotDefault integer
+     ---@field public Brick1 integer
+     ---@field public Brick2 integer
+     ---@field public Brick3 integer
+     ---@field public Brick4 integer
+    ['Entity.EntityID'] = {   SlotDefault=1,  Brick1=101,  Brick2=102,  Brick3=103,  Brick4=104,  };
+    ---@class Entity.GroupID
+     ---@field public Default integer @默认
+     ---@field public Brick integer @方块
+     ---@field public Slot integer @槽位
+    ['Entity.GroupID'] = {   Default=1,  Brick=2,  Slot=3,  };
     ---@class UI.FormID
      ---@field public MainForm integer
      ---@field public SettingForm integer
@@ -54,6 +66,8 @@ local tables =
 {
     { name='TbForm', file='ui_tbform', mode='map', index='id', value_type='UI.Form' },
     { name='TbLayer', file='ui_tblayer', mode='map', index='group_id', value_type='UI.Layer' },
+    { name='TbEntityLogic', file='entity_tbentitylogic', mode='map', index='id', value_type='Entity.EntityLogic' },
+    { name='TbGroup', file='entity_tbgroup', mode='map', index='group_id', value_type='Entity.Group' },
 }
 
 local function InitTypes(methods)
@@ -108,6 +122,38 @@ local function InitTypes(methods)
     end
     
     local beans = {}
+        do
+        ---@class Entity.EntityLogic 
+         ---@field public id integer @编号
+         ---@field public asset_name string @资源名
+         ---@field public group integer @界面组
+         ---@field public priority integer @优先级
+            local class = {
+                { name='id', type='integer'},
+                { name='asset_name', type='string'},
+                { name='group', type='integer'},
+                { name='priority', type='integer'},
+            }
+            beans['Entity.EntityLogic'] = class
+        end
+        do
+        ---@class Entity.Group 
+         ---@field public group_id integer @组
+         ---@field public group_name string @组
+         ---@field public auto_release_interval number @实体实例对象池自动释放可释放对象的间隔秒数
+         ---@field public capacity integer @实体实例对象池容量
+         ---@field public expire_time number @实体实例对象池对象过期秒数。
+         ---@field public priority integer @优先级
+            local class = {
+                { name='group_id', type='integer'},
+                { name='group_name', type='string'},
+                { name='auto_release_interval', type='number'},
+                { name='capacity', type='integer'},
+                { name='expire_time', type='number'},
+                { name='priority', type='integer'},
+            }
+            beans['Entity.Group'] = class
+        end
         do
         ---@class UI.Form 
          ---@field public id integer @编号
@@ -190,6 +236,54 @@ local function InitTypes(methods)
         end
     
     local beans = {}
+    do
+    ---@class Entity.EntityLogic 
+         ---@field public id integer
+         ---@field public asset_name string
+         ---@field public group integer
+         ---@field public priority integer
+        local class = SimpleClass()
+        class._id = -629124176
+        class._type_ = 'Entity.EntityLogic'
+        local id2name = {  }
+        class._deserialize = function(bs)
+            local o = {
+            id = readInt(bs),
+            asset_name = readString(bs),
+            group = readInt(bs),
+            priority = readInt(bs),
+            }
+            setmetatable(o, class)
+            return o
+        end
+        beans[class._type_] = class
+    end
+    do
+    ---@class Entity.Group 
+         ---@field public group_id integer
+         ---@field public group_name string
+         ---@field public auto_release_interval number
+         ---@field public capacity integer
+         ---@field public expire_time number
+         ---@field public priority integer
+        local class = SimpleClass()
+        class._id = -201952076
+        class._type_ = 'Entity.Group'
+        local id2name = {  }
+        class._deserialize = function(bs)
+            local o = {
+            group_id = readInt(bs),
+            group_name = readString(bs),
+            auto_release_interval = readFloat(bs),
+            capacity = readInt(bs),
+            expire_time = readFloat(bs),
+            priority = readInt(bs),
+            }
+            setmetatable(o, class)
+            return o
+        end
+        beans[class._type_] = class
+    end
     do
     ---@class UI.Form 
          ---@field public id integer

@@ -33,6 +33,9 @@ public class ProcedureMain : ProcedureBase
 
         var uiManager = GameEntry.UI;
         uiManager.OpenUIForm(cfg.UI.FormID.MainForm);
+
+        var entityComponent = GameEntry.Entity;
+        entityComponent.ShowEntity<SlotEntity>(cfg.Entity.EntityID.SlotDefault);
     }
 
     protected override void OnLeave(IFsm<IProcedureManager> procedureOwner, bool isShutdown)

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "asset_name": "Slot",
+    "group": 3,
+    "priority": 0
+  },
+  {
+    "id": 101,
+    "asset_name": "Brick_1",
+    "group": 2,
+    "priority": 0
+  },
+  {
+    "id": 102,
+    "asset_name": "Brick_2",
+    "group": 2,
+    "priority": 0
+  },
+  {
+    "id": 103,
+    "asset_name": "Brick_3",
+    "group": 2,
+    "priority": 0
+  },
+  {
+    "id": 104,
+    "asset_name": "Brick_4",
+    "group": 2,
+    "priority": 0
+  }
+]
